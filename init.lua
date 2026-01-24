@@ -920,23 +920,28 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'ellisonleao/gruvbox.nvim',
+    'catppuccin/nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      require('gruvbox').setup {
-        italic = {
-          strings = false,
-          comments = false,
+      require('catppuccin').setup {
+        styles = {
+          comments = {},
         },
-        transparent_mode = false,
+        integrations = {
+          cmp = true,
+          harpoon = true,
+          mason = true,
+          native_lsp = { enabled = true },
+          telescope = true,
+          treesitter = true,
+        },
       }
 
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.o.background = 'dark'
-      vim.cmd.colorscheme 'gruvbox'
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
 
@@ -1048,8 +1053,8 @@ require('lazy').setup({
           -- syntax highlighting, provided by Neovim
           vim.treesitter.start()
           -- folds, provided by Neovim
-          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-          vim.wo.foldmethod = 'expr'
+          -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          -- vim.wo.foldmethod = 'expr'
           -- indentation, provided by nvim-treesitter
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
